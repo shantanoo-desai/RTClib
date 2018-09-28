@@ -359,6 +359,17 @@ DateTime RTC_Millis::now() {
   return lastUnix;
 }
 
+// A version of now() that returns the fractional seconds in the
+// parameter given by reference.
+DateTime RTC_Millis::now(int &extraMilliseconds) {
+  uint32_t currentMillis = millis();
+  uint32_t elapsedSeconds = (currentMillis - lastMillis) / 1000;
+  extraMilliseconds = (currentMillis - lastMillis) % 1000;
+  lastMillis = currentMillis - extraMilliseconds;
+  lastUnix += elapsedSeconds;
+  return lastUnix;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////

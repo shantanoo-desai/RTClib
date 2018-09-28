@@ -127,6 +127,7 @@ public:
     static void begin(const DateTime& dt) { adjust(dt); }
     static void adjust(const DateTime& dt);
     static DateTime now();
+    static DateTime now(int &extraMilliseconds);
 
 protected:
     static uint32_t lastUnix;
